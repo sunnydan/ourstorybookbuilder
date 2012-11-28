@@ -1,0 +1,91 @@
+{% extends "blank.html" %}
+{% block content %}
+<table class="votetable" border="1">
+<!---->
+<tr class="voterow">
+<td class="tabletitle">Entertainment</td>
+<td class="tabletitle">{{branch.entertainment}}/100</td>
+    {% if user.is_authenticated and branch.author != user and not branch in user.ent_voters.all %}
+    <td class="bad">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="entertainment" value="-1">
+    <input type="submit" value="&#10008;">
+    </form>
+    </td>
+    <td class="good">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="entertainment" value="1">
+    <input type="submit" value="&#10004;">
+    </form>
+    </td>
+    {% elif user.is_authenticated and branch.author != user %}
+    <td colspan="2" style="text-align: center;">Voted</td>
+    {% endif %}
+</tr>
+<!---->
+<tr class="voterow">
+<td class="tabletitle">Writing</td>
+<td class="tabletitle">{{branch.writing}}/100</td>
+    {% if user.is_authenticated and branch.author != user and not branch in user.wri_voters.all %}
+    <td class="bad">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="writing" value="-1">
+    <input type="submit" value="&#10008;">
+    </form>
+    </td>
+    <td class="good">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="writing" value="1">
+    <input type="submit" value="&#10004;">
+    </form>
+    </td>
+    {% elif user.is_authenticated and branch.author != user %}
+    <td colspan="2" style="text-align: center;">Voted</td>
+    {% endif %}
+</tr>
+<!---->
+<tr class="voterow">
+<td class="tabletitle">Immersiveness</td>
+<td class="tabletitle">{{branch.immersiveness}}/100</td>
+    {% if user.is_authenticated and branch.author != user and not branch in user.imm_voters.all %}
+    <td class="bad">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="immersiveness" value="-1">
+    <input type="submit" value="&#10008;">
+    </form>
+    </td>
+    <td class="good">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="immersiveness" value="1">
+    <input type="submit" value="&#10004;">
+    </form>
+    </td>
+    {% elif user.is_authenticated and branch.author != user %}
+    <td colspan="2" style="text-align: center;">Voted</td>
+    {% endif %}
+</tr>
+<!---->
+<tr class="voterow">
+<td class="tabletitle">Interest</td>
+<td class="tabletitle">{{branch.interest}}/100</td>
+    {% if user.is_authenticated and branch.author != user and not branch in user.int_voters.all %}
+    <td class="bad">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="interest" value="-1">
+    <input type="submit" value="&#10008;">
+    </form>
+    </td>
+    <td class="good">
+    <form class="voteform" action="/vote/{{ branch.parent.id }}-{{ branch.action }}/" method="post">{% csrf_token %}
+    <input type="hidden" name="interest" value="1">
+    <input type="submit" value="&#10004;">
+    </form>
+    </td>
+    {% elif user.is_authenticated and branch.author != user %}
+    <td colspan="2" style="text-align: center;">Voted</td>
+    {% endif %}
+</tr>
+<!---->
+</table>
+{% endblock %}
+

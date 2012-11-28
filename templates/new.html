@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}New{% endblock %}
+{% block content %}
+{{ form.media }}
+<p>The action: -{{ action }}- does not exist yet. Write it!</p>
+<hr>
+{% if errors %}
+<p style="color: red;">{{ errors }}</p>
+{% endif %}
+
+<!---->
+
+<form action="/edit/{{ parent.id }}-{{ action }}/" method="post">{% csrf_token %}
+{{ form }}
+
+<!---->
+
+{% if user.is_authenticated %}
+<button type="button" onclick="areYouSure()">Submit</button>
+<p id="sure"></p>
+
+<script type="text/javascript">
+function areYouSure()
+{
+document.getElementById("sure").innerHTML="<input type='submit' value='Are you sure?'>";
+}
+</script>
+{% else %}
+<button type="button" onclick="areYouSure()">Submit</button>
+<p id="sure"></p>
+
+<script type="text/javascript">
+function areYouSure()
+{
+document.getElementById("sure").innerHTML="<button type='button' onclick='shouldRegister()'>Are you sure?</button><p id='suresure'></p>";
+}
+function shouldRegister()
+{
+document.getElementById("suresure").innerHTML="<input type='submit' value='Submit'><p>(If you make an account, you won't have to push this extra button to submit.)</p>";
+}
+</script>
+{% endif %}
+</form>
+
+<!---->
+{% endblock %}
+

@@ -1,0 +1,16 @@
+{% extends "blank.html" %}
+{% block content %}
+{% if branches %}
+  <div id="listed_ideas">
+    <h3 style="margin-top: -5px; margin-bottom: -1px;">Random Possible Actions:</h3>
+    {% for listed_branch in branches %}
+      <form id="actionform" action="/branch/" method="get" style="display: inline; margin: 0; padding: 0;">
+        <input type="hidden" name="acty" value="{{listed_branch.action}}">
+        <input type="hidden" name="current" value="{{branch.id}}">
+        <input style="display: inline; text-size: 1.5em;" type="submit" value="{{listed_branch.action}} {% include 'stars.html' %}">
+      </form>
+    {% endfor %}
+  </div>
+  <hr>
+{% endif %}
+{% endblock %}

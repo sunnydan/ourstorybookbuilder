@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+{% if branch_results or user_results %}
+    {% if branch_results %}
+        <h3>Branch Search Results</h3>
+        <hr>
+        <table>
+            <tr style="text-align: center; font-weight: bold;">
+                <td>Parent ID</td>
+                <td>Action</td>
+                <td>ID</td>
+                <td>Rating</td>
+            </tr>
+            {% for listed_branch in branch_results %}
+                {% include 'listed_branch.html' %}
+            {% endfor %}
+        </table>
+        <hr>
+    {% endif %}
+    {% if user_results %}
+        <h2>User Search Results</h2>
+        <hr>
+        <ul>
+            {% for user in user_results %}
+                <li><p><a href="/userpage/{{ user }}/">{{ user }}</a></li>
+            {% endfor %}
+        </ul>
+        <hr>
+    {% endif %}
+{% else %}
+    <h2>No Results</h2>
+    <hr>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{branch.id}}{% endblock %}
+{% block content %}
+
+<p>
+{% if branch.id != 1 %}
+  <button><a id="back" href="/branch/{{branch.parent.id}}/">&larr;Previous</a></button>
+{% endif %}
+
+<strong style="font-size: 1.5em;">"{{branch.action}}" by {{branch.author}}</strong> (Last edited: {{branch.lastedited}})
+
+{% if mine and branch.id != 1 %}
+  <form id="editform" action="/edit/" method="get" style="display: inline;">
+    <input type="hidden" name="parent_id" value="{{branch.parent.id}}">
+    <input type="hidden" name="action" value="{{branch.action}}">
+    <input type="submit" value="Edit" style="display: inline;">
+  </form>
+  <form id="killform" action="/kill/" method="get" style="display: inline;">
+    <input type="hidden" name="parent_id" value="{{branch.parent.id}}">
+    <input type="hidden" name="action" value="{{branch.action}}">
+    <button type="button" onclick="areYouSure()" style="display: inline;">Delete Branch</button>
+    <p id="sure"></p>
+
+<!---->
+
+<script type="text/javascript">
+function areYouSure()
+{document.getElementById("sure").innerHTML="<input type='submit' value='Are you sure?'>";}
+</script>
+
+<!---->
+
+  </form>
+{% endif %}
+</p>
+<hr>
+{{branch.text|safe}}
+<hr>
+<div id="interface">
+  <form id="actionform" action="/branch/" method="get">
+    <p>What do you want to do now? <input type="text" name="acty">
+    <input type="hidden" name="current" value="{{branch.id}}">
+    <input type="submit" value="Do it!"></p>
+  </form>
+  {% if not seed %}
+    {% include "voter.html" %}
+    {% if not user.is_authenticated %}
+      <p style="position: absolute; top: 10px; right: 230px;"><a style="text-decoration: underline;" href="/login/">Log in</a> or <a style="text-decoration: underline;" href="/register/">Register</a> to vote.</p>
+      <p style="height: 40px;"></p>
+    {% elif branch.author == user %}
+      <p style="height: 40px;"></p>
+    {% else %}
+      <p style="height: 50px;"></p>
+    {% endif %}
+  {% endif %}
+</div>
+<hr>
+{% include "options.html" %}
+{% endblock %}
+

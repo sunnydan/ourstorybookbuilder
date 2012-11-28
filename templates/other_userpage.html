@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}User page{% endblock %}
+{% block content %}
+<h2>{{foruser}}</h2>
+<hr>
+<h3>User Ratings</h3>
+<p>Overall: {{ overall }}/5</p>
+<p>Entertainment: {{ entertainment }}/5</p>
+<p>Writing: {{ writing }}/5</p>
+<p>Immersiveness: {{ immersiveness }}/5</p>
+<p>Interest: {{ interest }}/5</p>
+<hr>
+  {% if branches %}
+    <h3>Branch{{ branches|pluralize:"es" }}</h3>
+    <hr>
+    <table>
+      <tr style="text-align: center; font-weight: bold;">
+        <td>Parent ID</td>
+        <td>Action</td>
+        <td>ID</td>
+        <td>Rating</td>
+      </tr>
+      {% for listed_branch in branches %}
+        {% include 'listed_branch.html' %}
+      {% endfor %}
+    </table>
+    <hr>
+  {% else %}
+    <p><strong>No Branches</strong></p>
+    <hr>
+  {% endif %}
+{% endblock %}
+

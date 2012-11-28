@@ -1,0 +1,55 @@
+html {
+min-height: 500px;
+}
+
+body {
+background: white url('images/branch-background.jpg') center top no-repeat;
+height: 100%
+}
+
+a {
+text-decoration: none;
+color: black;
+}
+
+a:hover {
+color: green;
+}
+
+input:hover {
+color: green;
+}
+
+button:hover {
+color: green;
+}
+
+#logger {
+position: absolute;
+top: 0;
+right: 20px;
+}
+
+.voterow td {
+width: 5px;
+font-size: .75em;
+}
+
+.voterow .good:hover {
+background-color: green;
+}
+
+.voterow .bad:hover{
+background-color: red;
+}
+
+#interface {
+position:relative;
+}
+
+.votetable {
+position:absolute;
+top: -10px;
+right: 20px;
+}
+

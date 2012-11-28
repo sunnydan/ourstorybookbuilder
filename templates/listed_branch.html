@@ -1,0 +1,27 @@
+{% extends 'blank.html' %}
+{% block content %}
+<tr style="text-align: center;">
+    <td>{{ listed_branch.parent.id }}</td>
+    <td>{{ listed_branch.action }}</td>
+    <td>{{ listed_branch.id }}</td>
+    <td>{% include 'stars.html' %}</td>
+    {% if listed_branch.author == user and listed_branch.id != 1 %}
+        <td>
+            <form id="editform" action="/edit/" method="get">
+                <input type="hidden" name="parent_id" value="{{listed_branch.parent.id}}">
+                <input type="hidden" name="action" value="{{listed_branch.action}}">
+                <input type="submit" value="Edit"></p>
+            </form>
+        </td>
+    {% endif %}
+    {% if listed_branch.id != 1 %}
+    <td>
+        <form id="actionform" action="/branch/" method="get">
+            <input type="hidden" name="current" value="{{listed_branch.parent.id}}">
+            <input type="hidden" name="acty" value="{{listed_branch.action}}">
+            <input type="submit" value="Go&#8658;"></p>
+        </form>
+    </td>
+    {% endif %}
+</tr>
+{% endblock %}
